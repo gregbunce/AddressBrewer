@@ -41,13 +41,13 @@ namespace AddressBrewer
             {
                 case OutputType.CountyUpdate:
                 {
-                    brewer = new CountyUpdateBrewer();
+                    brewer = new CountyUpdateBrewer(options);
                     break;
                 }
 
                 case OutputType.ValidationReport:
                 {
-                    brewer = new ValidationReportBrewer();
+                    brewer = new ValidationReportBrewer(options);
                     break;
                 }
 
@@ -57,9 +57,10 @@ namespace AddressBrewer
                 }
             }
 
-            brewer.Brew();
+            brewer.Brew(options);
 
 
         }
+
     }
 }

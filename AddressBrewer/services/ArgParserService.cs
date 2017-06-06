@@ -15,8 +15,17 @@ namespace AddressBrewer.services
             var p = new OptionSet
             {
                 {
-                    "c|connection=", "REQUIRED. the path to the .sde connection file for the database containing roads. eg: c:\\sgid.sde",
+                    "c|connection=", 
+                    "the path to the .sde connection file for the database containing roads. eg: c:\\sgid.sde",
                     v => options.SdeConnectionPath = v
+                },
+                {
+                    "d|database=", "REQUIRED. the name of the database containing the address points. eg: c:\\sgid.sde",
+                    v => options.DatabaseName = v
+                },
+                {
+                    "s|server=", "REQUIRED. the name of the server containing the database with the address points. eg: c:\\sgid.sde",
+                    v => options.Server = v
                 },
                 {
                     "t|type=", "REQUIRED. The output type you want to grind. `CountyUpdate`, `ValidationReport`, ...",
@@ -63,24 +72,36 @@ namespace AddressBrewer.services
                 return null;
             }
 
-            if (string.IsNullOrEmpty(options.SdeConnectionPath))
+            if (string.IsNullOrEmpty(options.DatabaseName))
             {
                 throw new InvalidOperationException(
-                    "Missing required option -c for the location of the sde connection file.");
+                    "Missing required option -d for the name of the database.");
             }
 
-            if (!new FileInfo(options.SdeConnectionPath).Exists)
+            if (string.IsNullOrEmpty(options.Server))
             {
-                var cwd = Directory.GetCurrentDirectory();
-                var location = Path.Combine(cwd, options.SdeConnectionPath.TrimStart('\\'));
-
-                if (!new FileInfo(location).Exists)
-                {
-                    throw new InvalidOperationException("The location for the sde file path is not found.");
-                }
-
-                options.SdeConnectionPath = location;
+                throw new InvalidOperationException(
+                    "Missing required option -s for the name of the server.");
             }
+
+            //if (string.IsNullOrEmpty(options.SdeConnectionPath))
+            //{
+            //    throw new InvalidOperationException(
+            //        "Missing required option -c for the location of the sde connection file.");
+            //}
+
+            //if (!new FileInfo(options.SdeConnectionPath).Exists)
+            //{
+            //    var cwd = Directory.GetCurrentDirectory();
+            //    var location = Path.Combine(cwd, options.SdeConnectionPath.TrimStart('\\'));
+
+            //    if (!new FileInfo(location).Exists)
+            //    {
+            //        throw new InvalidOperationException("The location for the sde file path is not found.");
+            //    }
+
+            //    options.SdeConnectionPath = location;
+            //}
 
             if (showHelp)
             {

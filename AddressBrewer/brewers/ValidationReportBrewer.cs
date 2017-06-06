@@ -18,7 +18,7 @@ namespace AddressBrewer.brewers
             _options = options;
         }
 
-        public void Brew()
+        public void Brew(CliOptions options)
         {
             throw new System.NotImplementedException();
         }
