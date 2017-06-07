@@ -28,6 +28,18 @@ namespace AddressBrewer.services
                     v => options.Server = v
                 },
                 {
+                    "ss|sgidserver=", "REQUIRED. the name of the server containing the database with the address points. eg: c:\\sgid.sde",
+                    v => options.SGIDServer = v
+                },
+                {
+                    "sd|sgiddatabase=", "REQUIRED. the name of the server containing the database with the address points. eg: c:\\sgid.sde",
+                    v => options.SGIDDatabase = v
+                },
+                {
+                    "si|sgidID=", "REQUIRED. the name of the server containing the database with the address points. eg: c:\\sgid.sde",
+                    v => options.SGIDID = v
+                },
+                {
                     "t|type=", "REQUIRED. The output type you want to grind. `CountyUpdate`, `ValidationReport`, ...",
                     v => options.OutputType = (OutputType) Enum.Parse(typeof (OutputType), v)
                 },
