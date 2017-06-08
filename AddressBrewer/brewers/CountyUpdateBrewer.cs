@@ -51,7 +51,7 @@ namespace AddressBrewer.brewers
                         // find agrc's nearest address from the counties supplied address to check for a match
                         string nearestAgrcAddrQuery = @"DECLARE @g geometry = (select Shape from AddressPoints_FromCounty where OBJECTID = " + countyAddress.OBJECTID + @") 
                         SELECT TOP(1) Shape.STDistance(@g) as DISTANCE, OBJECTID, UTAddPtID  FROM AddressPoints
-                        WHERE Shape.STDistance(@g) is not null and Shape.STDistance(@g) < 20
+                        WHERE Shape.STDistance(@g) is not null and Shape.STDistance(@g) < 400
                         ORDER BY Shape.STDistance(@g);";
 
                         using (var con1 = new SqlConnection(connectionStringUTAP))
@@ -72,11 +72,13 @@ namespace AddressBrewer.brewers
                                     else
                                     {
                                         Console.WriteLine("Did not match the AGRC Nearest Address of: " + nearestAgrcAddr.UTAddPtID);
+                                        // it's new, validate it against the roads
                                     }
                                 }                                
                             }
                             else
                             {
+                                // it's new, validate it against the roads
                                 // Check if AddressPoint from county can be verified within a nearby road segment, so we can add it to the agrc address point database
                                 //Console.WriteLine("Counld not find nearby agrc matching address for this address, check roads to see if it's valid and we'll pass it in as a new address to the agrc address points.");
                                 Console.WriteLine("No nearby addresses found, check if it can be validated with nearby road.");
@@ -108,6 +110,7 @@ namespace AddressBrewer.brewers
                                     {
                                     }
                                 }
+
 
 
 

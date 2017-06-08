@@ -52,6 +52,7 @@
     <Compile Include="brewers\ValidationReportBrewer.cs" />
     <Compile Include="commands\FindMatchingPointCommand.cs" />
     <Compile Include="commands\GetQueryResultsCommand.cs" />
+    <Compile Include="commands\InsertNewPointCommand.cs" />
     <Compile Include="contracts\IBrewable.cs" />
     <Compile Include="models\CliOptions.cs" />
     <Compile Include="models\OutputType.cs" />
