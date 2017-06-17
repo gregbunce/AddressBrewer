@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="commands\CompareAddrPntAttributesCommand.cs" />
     <Compile Include="brewers\CountyUpdateBrewer.cs" />
     <Compile Include="brewers\ValidationReportBrewer.cs" />
     <Compile Include="commands\FindMatchingPointCommand.cs" />

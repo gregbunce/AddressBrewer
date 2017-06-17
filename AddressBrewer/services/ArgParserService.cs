@@ -29,15 +29,15 @@ namespace AddressBrewer.services
                 },
                 {
                     "ss|sgidserver=", "REQUIRED. the name of the server containing the database with the address points. eg: c:\\sgid.sde",
-                    v => options.SGIDServer = v
+                    v => options.SgidServer = v
                 },
                 {
                     "sd|sgiddatabase=", "REQUIRED. the name of the server containing the database with the address points. eg: c:\\sgid.sde",
-                    v => options.SGIDDatabase = v
+                    v => options.SgidDatabase = v
                 },
                 {
                     "si|sgidID=", "REQUIRED. the name of the server containing the database with the address points. eg: c:\\sgid.sde",
-                    v => options.SGIDID = v
+                    v => options.SgidId = v
                 },
                 {
                     "t|type=", "REQUIRED. The output type you want to grind. `CountyUpdate`, `ValidationReport`, ...",
@@ -94,6 +94,24 @@ namespace AddressBrewer.services
             {
                 throw new InvalidOperationException(
                     "Missing required option -s for the name of the server.");
+            }
+
+            if (string.IsNullOrEmpty(options.SgidDatabase))
+            {
+                throw new InvalidOperationException(
+                    "Missing required option -sd for the name of the sgid database.");
+            }
+
+            if (string.IsNullOrEmpty(options.SgidId))
+            {
+                throw new InvalidOperationException(
+                    "Missing required option -si for the name of the sgid conn user/pass.");
+            }
+
+            if (string.IsNullOrEmpty(options.SgidServer))
+            {
+                throw new InvalidOperationException(
+                    "Missing required option -ss for the name of the sgid server.");
             }
 
             //if (string.IsNullOrEmpty(options.SdeConnectionPath))
